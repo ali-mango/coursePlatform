@@ -43,7 +43,7 @@ export function MarkCompleteButton({
     <button
       onClick={toggle}
       disabled={isPending}
-      className={`inline-flex items-center gap-2.5 rounded-xl border px-5 py-3 text-sm font-medium transition ${
+      className={`inline-flex items-center cursor-pointer gap-2.5 rounded-xl border px-5 py-3 text-sm font-medium transition ${
         completed
           ? "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
           : "border-slate-200 bg-white text-slate-700 hover:border-blue-200 hover:bg-blue-50"

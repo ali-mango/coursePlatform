@@ -1,4 +1,3 @@
-// src/components/ui/lesson-content.tsx
 "use client";
 
 import { useState, useCallback } from "react";
@@ -8,7 +7,6 @@ import rehypeHighlight from "rehype-highlight";
 import { Check, Copy } from "lucide-react";
 import type { Components } from "react-markdown";
 
-/* ── helpers ── */
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -22,6 +20,7 @@ function CopyButton({ text }: { text: string }) {
     <button
       onClick={copy}
       className="flex items-center gap-1 text-xs text-slate-400 transition hover:text-slate-200"
+      type="button"
     >
       {copied ? (
         <>
@@ -38,7 +37,6 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
-/* Language display names */
 const langNames: Record<string, string> = {
   html: "HTML",
   css: "CSS",
@@ -56,11 +54,8 @@ const langNames: Record<string, string> = {
   python: "Python",
 };
 
-/* ── custom renderers ── */
 const components: Components = {
-  /* Code blocks with language label + copy button */
   pre({ children, ...props }) {
-    // Extract the code element and its props
     const codeEl = children as React.ReactElement<{
       className?: string;
       children?: React.ReactNode;
@@ -74,15 +69,18 @@ const components: Components = {
       const match = className.match(/language-(\w+)/);
       lang = match ? match[1] : "";
 
-      // Extract raw text for the copy button
       const extractText = (node: React.ReactNode): string => {
         if (typeof node === "string") return node;
         if (Array.isArray(node)) return node.map(extractText).join("");
         if (node && typeof node === "object" && "props" in node) {
-          return extractText((node as React.ReactElement<{ children?: React.ReactNode }>).props.children);
+          return extractText(
+            (node as React.ReactElement<{ children?: React.ReactNode }>).props
+              .children
+          );
         }
         return "";
       };
+
       codeText = extractText(codeEl.props.children).trim();
     }
 
@@ -90,7 +88,6 @@ const components: Components = {
 
     return (
       <div className="group relative my-6 overflow-hidden rounded-xl border border-slate-200 bg-[#0d1117] shadow-sm">
-        {/* Top bar */}
         <div className="flex items-center justify-between border-b border-slate-700/60 bg-[#161b22] px-4 py-2">
           <span className="text-xs font-medium text-slate-400">
             {displayLang || "Code"}
@@ -98,7 +95,6 @@ const components: Components = {
           <CopyButton text={codeText} />
         </div>
 
-        {/* Code */}
         <pre
           className="!m-0 !rounded-none !border-0 !bg-transparent p-4 text-sm leading-relaxed"
           {...props}
@@ -109,15 +105,7 @@ const components: Components = {
     );
   },
 
-  /* Blockquotes as styled callout boxes */
-  blockquote({ children, ...props }) {
-    // Detect if it's a "Try it" or "Tip" callout
-    const text =
-      typeof children === "string"
-        ? children
-        : "";
-
-    // Check the rendered children for "Try it" or "Tip" text
+  blockquote({ children }) {
     let isTryIt = false;
     let isTip = false;
 
@@ -132,13 +120,13 @@ const components: Components = {
         checkChildren(el.props.children);
       }
     };
+
     checkChildren(children);
 
-    const isCallout = isTryIt || isTip;
-    const emoji = isTryIt ? "🚀" : isTip ? "💡" : "💡";
-    const label = isTryIt ? "Try it" : isTip ? "Tip" : "";
+    if (isTryIt || isTip) {
+      const emoji = isTryIt ? "🚀" : "💡";
+      const label = isTryIt ? "Try it" : "Tip";
 
-    if (isCallout) {
       return (
         <div className="my-6 rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50/50 p-5">
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-blue-800">
@@ -153,16 +141,12 @@ const components: Components = {
     }
 
     return (
-      <blockquote
-        className="my-6 rounded-r-xl border-l-4 border-l-slate-300 bg-slate-50 py-1 pl-5 pr-4 not-italic [&_p]:text-slate-700"
-        {...props}
-      >
+      <blockquote className="my-6 rounded-r-xl border-l-4 border-l-slate-300 bg-slate-50 py-1 pl-5 pr-4 not-italic [&_p]:text-slate-700">
         {children}
       </blockquote>
     );
   },
 
-  /* Tables with clean styling */
   table({ children, ...props }) {
     return (
       <div className="my-6 overflow-x-auto rounded-xl border border-slate-200">
@@ -186,16 +170,19 @@ const components: Components = {
 
   td({ children, ...props }) {
     return (
-      <td className="border-t border-slate-100 px-4 py-3 text-sm text-slate-700" {...props}>
+      <td
+        className="border-t border-slate-100 px-4 py-3 text-sm text-slate-700"
+        {...props}
+      >
         {children}
       </td>
     );
   },
 
-  /* Inline code */
   code({ className, children, ...props }) {
-    // If it's inside a <pre>, let the pre handler deal with it
-    const isBlock = className?.includes("language-") || className?.includes("hljs");
+    const isBlock =
+      className?.includes("language-") || className?.includes("hljs");
+
     if (isBlock) {
       return (
         <code className={className} {...props}>
@@ -214,7 +201,6 @@ const components: Components = {
     );
   },
 
-  /* Links */
   a({ children, href, ...props }) {
     return (
       <a
@@ -230,42 +216,32 @@ const components: Components = {
   },
 };
 
-/* ── main component ── */
 interface LessonContentProps {
   markdown: string;
 }
 
 export function LessonContent({ markdown }: LessonContentProps) {
-  let content = markdown;
-  content = content.replace(/\\r\\n/g, "\n");
-  content = content.replace(/\\r/g, "");
-  if (content.includes("\\n")) {
-    content = content.replace(/\\n/g, "\n");
-  }
+  const normalizedMarkdown = markdown
+    .replace(/\r\n/g, "\n")
+    .replace(/^#\s+.*\n+/, "");
 
   return (
     <div
       className={[
         "prose prose-slate max-w-none",
-        // Headings
         "prose-headings:tracking-tight prose-headings:text-slate-900",
+        "prose-h1:mt-0 prose-h1:mb-6 prose-h1:text-[2.25rem] prose-h1:font-bold",
         "prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-[1.65rem] prose-h2:font-bold",
         "prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-h3:font-semibold",
-        // Paragraphs
         "prose-p:text-[16px] prose-p:leading-[1.8] prose-p:text-slate-600",
-        // Lists
         "prose-li:text-[16px] prose-li:leading-[1.8] prose-li:text-slate-600",
         "prose-ul:my-4 prose-ol:my-4",
-        // Strong
         "prose-strong:text-slate-800",
-        // Remove default prose styles we're overriding with custom components
         "prose-pre:bg-transparent prose-pre:p-0 prose-pre:m-0 prose-pre:border-0 prose-pre:shadow-none",
         "prose-code:before:content-none prose-code:after:content-none",
         "prose-blockquote:border-0 prose-blockquote:p-0 prose-blockquote:not-italic",
         "prose-table:my-0",
-        // Images
         "prose-img:rounded-xl prose-img:shadow-sm",
-        // HR
         "prose-hr:my-10 prose-hr:border-slate-200",
       ].join(" ")}
     >
@@ -274,7 +250,7 @@ export function LessonContent({ markdown }: LessonContentProps) {
         rehypePlugins={[rehypeHighlight]}
         components={components}
       >
-        {content}
+        {normalizedMarkdown}
       </ReactMarkdown>
     </div>
   );

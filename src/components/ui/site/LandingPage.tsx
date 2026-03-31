@@ -1,9 +1,13 @@
+"use client";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import image1 from "@/assests/images/image1.png";
 import image2 from "@/assests/images/image2.png";
 import image3 from "@/assests/images/image3.png";
+import logo from "@/assests/images/codeclover.png";
+import type { Variants } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -53,343 +57,163 @@ const curriculumModules: CurriculumModule[] = [
   {
     number: 1,
     title: "Getting Started",
-    lessons: 4,
-    duration: "45 min",
+    lessons: 2,
+    duration: "20 min",
     description:
-      "Set up your dev environment and understand how the web works.",
+      "Set up your tools properly and understand how to begin building your first site.",
     topics: [
       {
-        title: "How websites work",
+        title: "Setup and tools",
         details: [
-          "Understand the relationship between browsers, servers, and files",
-          "Learn what HTML, CSS, and JavaScript each do",
-          "See how a webpage gets loaded and rendered",
+          "Install VS Code and prepare your workspace",
+          "Understand what tools you actually need as a beginner",
+          "Avoid overwhelm by starting simple",
         ],
       },
       {
-        title: "Setting up VS Code",
+        title: "Your first project folder",
         details: [
-          "Install the editor and essential extensions",
-          "Organize your folders and files properly",
-          "Set up a workflow that feels clean and beginner-friendly",
-        ],
-      },
-      {
-        title: "Your first HTML file",
-        details: [
-          "Create and save your very first webpage",
-          "Understand basic tags and page structure",
-          "Open your file in the browser and test changes live",
-        ],
-      },
-      {
-        title: "Browser DevTools intro",
-        details: [
-          "Inspect elements and view styles",
-          "Debug layout issues quickly",
-          "Use DevTools to experiment without breaking your code",
+          "Create your first website folder correctly",
+          "Open it in VS Code",
+          "Get ready to write your first HTML page",
         ],
       },
     ],
   },
   {
     number: 2,
-    title: "HTML Foundations",
-    lessons: 6,
-    duration: "1.5 hrs",
-    description: "Write semantic, accessible HTML from scratch.",
+    title: "HTML Basics",
+    lessons: 5,
+    duration: "50 min",
+    description:
+      "Learn the structure of a webpage and build clean HTML from scratch.",
     topics: [
       {
-        title: "Document structure",
+        title: "Page structure",
         details: [
-          "Build a proper HTML5 page skeleton",
-          "Understand head, body, meta tags, and title",
-          "Keep your markup clean and readable",
+          "Understand the HTML skeleton",
+          "Use headings, paragraphs, and text properly",
+          "Build pages with clear structure",
         ],
       },
       {
-        title: "Text & links",
+        title: "Links, images, and content",
         details: [
-          "Use headings, paragraphs, emphasis, and anchors correctly",
-          "Create meaningful links and navigation paths",
-          "Improve readability with good content structure",
+          "Add links and images correctly",
+          "Use lists and simple sections",
+          "Create pages that feel like real websites",
         ],
       },
       {
-        title: "Images & media",
+        title: "Semantic HTML",
         details: [
-          "Insert images with proper alt text",
-          "Work with audio, video, and embedded content",
-          "Optimize content for better accessibility",
-        ],
-      },
-      {
-        title: "Forms & inputs",
-        details: [
-          "Build forms with labels and common input types",
-          "Understand placeholders, validation, and usability",
-          "Create forms users can complete easily",
-        ],
-      },
-      {
-        title: "Tables & lists",
-        details: [
-          "Display structured data in tables",
-          "Use ordered and unordered lists properly",
-          "Choose the right structure for the right content",
-        ],
-      },
-      {
-        title: "Semantic elements",
-        details: [
-          "Use header, main, section, article, and footer meaningfully",
-          "Improve SEO and accessibility with better markup",
-          "Write HTML that feels professional from the start",
+          "Use meaningful tags like header, nav, main, and footer",
+          "Write cleaner and more readable markup",
+          "Build habits that scale as you improve",
         ],
       },
     ],
   },
   {
     number: 3,
-    title: "CSS Fundamentals",
-    lessons: 8,
-    duration: "2.5 hrs",
-    description: "Style pages with confidence using modern CSS.",
+    title: "CSS Basics",
+    lessons: 5,
+    duration: "1 hr",
+    description:
+      "Make your site look polished with colors, spacing, layout, and typography.",
     topics: [
       {
-        title: "Selectors & specificity",
+        title: "How CSS works",
         details: [
-          "Target elements the right way",
-          "Understand class, id, and element selectors",
-          "Avoid styling conflicts and confusing overrides",
+          "Connect CSS to your HTML",
+          "Style text, backgrounds, and spacing",
+          "Understand selectors and simple styling rules",
         ],
       },
       {
-        title: "Box model",
+        title: "Box model and layout",
         details: [
-          "Master margin, border, padding, and content",
-          "Understand spacing and layout behavior",
-          "Fix common sizing and overflow issues",
+          "Use padding, margin, and borders with confidence",
+          "Understand how spacing affects layout",
+          "Avoid common beginner layout mistakes",
         ],
       },
       {
-        title: "Colors & typography",
+        title: "Flexbox and styling",
         details: [
-          "Choose readable text styles and color combinations",
-          "Apply font sizing, weight, and spacing with purpose",
-          "Make pages feel polished and intentional",
-        ],
-      },
-      {
-        title: "Flexbox",
-        details: [
-          "Align items horizontally and vertically",
-          "Build common UI layouts faster",
-          "Understand direction, spacing, and wrapping",
-        ],
-      },
-      {
-        title: "Grid layout",
-        details: [
-          "Create more advanced page structures",
-          "Control rows, columns, and placement",
-          "Know when to use Grid vs Flexbox",
-        ],
-      },
-      {
-        title: "Responsive design",
-        details: [
-          "Make layouts adapt to different screen sizes",
-          "Use breakpoints confidently",
-          "Build pages that work on mobile and desktop",
-        ],
-      },
-      {
-        title: "Transitions",
-        details: [
-          "Add subtle movement and polish",
-          "Create hover and state changes smoothly",
-          "Improve user experience without overdoing effects",
-        ],
-      },
-      {
-        title: "Project: Portfolio page",
-        details: [
-          "Apply everything in a real mini project",
-          "Build a clean personal portfolio layout",
-          "Practice combining structure, style, and responsiveness",
+          "Create navbars and card layouts",
+          "Use Flexbox for simple responsive structure",
+          "Make your site look more modern and organized",
         ],
       },
     ],
   },
   {
     number: 4,
-    title: "JavaScript Basics",
-    lessons: 10,
-    duration: "3 hrs",
-    description: "Understand core JS concepts and DOM manipulation.",
+    title: "Responsive Design",
+    lessons: 2,
+    duration: "25 min",
+    description:
+      "Make your website work better on mobile and different screen sizes.",
     topics: [
       {
-        title: "Variables & types",
+        title: "Responsive basics",
         details: [
-          "Store and update data in JavaScript",
-          "Understand strings, numbers, booleans, arrays, and objects",
-          "Avoid common beginner mistakes with values",
+          "Use the viewport meta tag properly",
+          "Understand how layouts change across screens",
+          "Make your pages easier to view on phones",
         ],
       },
       {
-        title: "Functions",
+        title: "Simple media queries",
         details: [
-          "Write reusable blocks of logic",
-          "Pass data into functions and return values",
-          "Use functions to organize your code better",
-        ],
-      },
-      {
-        title: "Conditionals",
-        details: [
-          "Make your app respond to different situations",
-          "Use if, else, and comparison logic",
-          "Control program flow clearly",
-        ],
-      },
-      {
-        title: "Loops & arrays",
-        details: [
-          "Repeat tasks efficiently",
-          "Work with lists of data",
-          "Use loops to display and process content",
-        ],
-      },
-      {
-        title: "Objects",
-        details: [
-          "Group related data together",
-          "Read and update object properties",
-          "Model real-world information in code",
-        ],
-      },
-      {
-        title: "DOM manipulation",
-        details: [
-          "Select elements and update page content",
-          "Change text, classes, and attributes dynamically",
-          "Make websites feel interactive",
-        ],
-      },
-      {
-        title: "Events",
-        details: [
-          "Respond to clicks, typing, and user actions",
-          "Connect UI controls to JavaScript behavior",
-          "Build simple interactions users can feel",
-        ],
-      },
-      {
-        title: "Fetch API",
-        details: [
-          "Get data from APIs",
-          "Understand requests, responses, and JSON",
-          "Use real external data in your projects",
-        ],
-      },
-      {
-        title: "Error handling",
-        details: [
-          "Catch errors before they break the experience",
-          "Use try/catch in practical scenarios",
-          "Debug with more confidence",
-        ],
-      },
-      {
-        title: "Project: Interactive quiz",
-        details: [
-          "Build a real mini app with state and interactions",
-          "Display questions and track answers",
-          "Practice combining logic, DOM work, and UI updates",
+          "Adjust layouts for mobile and desktop",
+          "Make text and sections adapt better",
+          "Build a more usable beginner project",
         ],
       },
     ],
   },
   {
     number: 5,
-    title: "Building Real Projects",
-    lessons: 5,
-    duration: "2 hrs",
-    description: "Combine everything into portfolio-ready projects.",
+    title: "Build Your Website",
+    lessons: 2,
+    duration: "40 min",
+    description:
+      "Put everything together into a real beginner website project.",
     topics: [
       {
-        title: "Project planning",
+        title: "Your final website build",
         details: [
-          "Break a project into smaller steps",
-          "Plan layout, content, and functionality before coding",
-          "Work with more structure and less guesswork",
+          "Create a simple multi-section website",
+          "Combine HTML and CSS into one clean project",
+          "Practice building something complete from scratch",
         ],
       },
       {
-        title: "Landing page build",
+        title: "Make it your own",
         details: [
-          "Create a polished marketing-style page",
-          "Practice hierarchy, spacing, and call-to-actions",
-          "Focus on real-world layout decisions",
-        ],
-      },
-      {
-        title: "To-do app",
-        details: [
-          "Build an interactive app with JavaScript",
-          "Add, remove, and manage tasks",
-          "Strengthen your understanding of DOM updates",
-        ],
-      },
-      {
-        title: "Weather app",
-        details: [
-          "Use an API in a practical project",
-          "Display live weather data on the page",
-          "Practice fetch, state updates, and user inputs",
-        ],
-      },
-      {
-        title: "Deploying online",
-        details: [
-          "Publish your project so others can view it",
-          "Understand the basics of hosting and deployment",
-          "Turn your work into portfolio-ready links",
+          "Edit your text, colors, and sections",
+          "Personalize your page with your own content",
+          "Finish with a result you can actually show",
         ],
       },
     ],
   },
   {
     number: 6,
-    title: "What’s Next",
-    lessons: 3,
-    duration: "30 min",
+    title: "Go Live",
+    lessons: 1,
+    duration: "15 min",
     description:
-      "Map out your continued learning path after the fundamentals.",
+      "Learn how to put your finished website online and share it with others.",
     topics: [
       {
-        title: "Frontend frameworks overview",
+        title: "Publishing your site",
         details: [
-          "Understand what React and similar tools are for",
-          "See how frameworks build on HTML, CSS, and JavaScript",
-          "Know what to explore after mastering the basics",
-        ],
-      },
-      {
-        title: "Backend basics",
-        details: [
-          "Learn what happens behind the frontend",
-          "Understand servers, databases, and APIs at a high level",
-          "See the bigger picture of full-stack development",
-        ],
-      },
-      {
-        title: "Career roadmap",
-        details: [
-          "Choose your next projects strategically",
-          "Start building a portfolio that shows real skills",
-          "Plan your path toward freelancing, internships, or junior roles",
+          "Understand basic hosting for beginners",
+          "Upload your site online simply",
+          "Share your first real website with confidence",
         ],
       },
     ],
@@ -400,20 +224,26 @@ function formatPeso(n: number) {
   return `₱${n.toLocaleString("en-PH")}`;
 }
 
-const trustedFaces = [
-  {
-    src: image1,
-    alt: "Student face 1",
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
   },
-  {
-    src: image2,
-    alt: "Student face 2",
+};
+
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
   },
-  {
-    src: image3,
-    alt: "Student face 3",
-  },
-];
+};
 
 export default function LandingPage({ courses }: { courses: CourseLite[] }) {
   const freeCourse = courses.find((c) => c.is_free) ?? courses[0];
@@ -422,323 +252,382 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
   return (
     <main className="bg-slate-50">
       {/* HERO */}
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-14">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs text-slate-700">
-              <Sparkles className="h-4 w-4" />
-              New modules added weekly
-            </div>
-
-            <h1 className="mt-5 text-5xl font-semibold leading-[1.05] tracking-tight text-slate-900">
-              Learn Web Dev Fundamentals{" "}
-              <span className="text-blue-600">— Step by step</span>
-            </h1>
-
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600">
-              No overwhelm. Just a clear path + projects you&apos;ll actually
-              finish. Text-based, beginner-friendly, and built for self-learners.
-            </p>
-
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href={paidCourse ? `/courses/${paidCourse.slug}` : "/courses"}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
-              >
-                Get Web Dev Fundamentals{" "}
-                {paidCourse ? `(${formatPeso(paidCourse.price_php)})` : ""}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-
-              <Link
-                href={freeCourse ? `/courses/${freeCourse.slug}` : "/courses"}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border bg-white px-5 py-3 text-sm font-medium text-slate-900 hover:bg-slate-50"
-              >
-                Start Free Course
-              </Link>
-            </div>
-
-            <div className="mt-8 flex items-center gap-3 text-sm text-slate-600">
-  <div className="flex -space-x-2">
-    {trustedFaces.map((face, index) => (
-      <div
-        key={index}
-        className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-slate-200 shadow-sm"
-      >
-        <Image
-          src={face.src}
-          alt={face.alt}
-          fill
-          className="object-cover"
-          sizes="32px"
-        />
-      </div>
-    ))}
-  </div>
-  <span>Trusted by 500+ beginner devs</span>
-</div>
-          </div>
-
-          {/* HERO CARD */}
-          <div className="rounded-3xl border bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                <Check className="h-4 w-4" />
-                Unlocked
-              </div>
-              <div className="text-xs text-slate-500">Progress</div>
-            </div>
-
-            <div className="mt-5 rounded-2xl border bg-slate-50 p-5">
-              <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-                <Code2 className="h-4 w-4 text-blue-600" />
-                Module 2: CSS Fundamentals
+      <section className="pb-10 pt-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            className="grid items-center gap-10 lg:grid-cols-2"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.div variants={fadeUp}>
+              <div className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs text-slate-700">
+                <Sparkles className="h-4 w-4" />
+                Beginner-friendly • Text-based • Self-paced
               </div>
 
-              <pre className="mt-4 overflow-x-auto rounded-xl bg-white p-4 text-xs text-slate-800">
+              <h1 className="mt-5 text-5xl font-semibold leading-[1.05] tracking-tight text-slate-900 sm:text-6xl">
+                Learn to Build Your First Website{" "}
+                <span className="text-blue-600">— Step by step</span>
+              </h1>
+
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                No overwhelm. Just a simple, beginner-friendly path to learning
+                HTML, CSS, responsive design, and building a real website from
+                scratch.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link
+                  href={paidCourse ? `/courses/${paidCourse.slug}` : "/courses"}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
+                >
+                  Get Full Course{" "}
+                  {paidCourse ? `(${formatPeso(paidCourse.price_php)})` : "(₱49)"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                <Link
+                  href={freeCourse ? `/courses/${freeCourse.slug}` : "/courses"}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border bg-white px-5 py-3 text-sm font-medium text-slate-900 transition hover:bg-slate-50"
+                >
+                  Start Free Course
+                </Link>
+              </div>
+
+              <p className="mt-5 text-sm text-slate-500">
+                Start with the free mini-course, then unlock the full beginner
+                course for only{" "}
+                <span className="font-semibold text-slate-900">₱49</span>.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <div className="rounded-3xl border bg-white p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+                    <Check className="h-4 w-4" />
+                    Beginner Progress
+                  </div>
+                  <div className="text-xs text-slate-500">Example path</div>
+                </div>
+
+                <div className="mt-5 rounded-2xl border bg-slate-50 p-5">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                    <Code2 className="h-4 w-4 text-blue-600" />
+                    Building Your First Styled Section
+                  </div>
+
+                  <pre className="mt-4 overflow-x-auto rounded-xl bg-white p-4 text-xs text-slate-800">
 {`.container {
   display: flex;
   gap: 1rem;
   padding: 2rem;
 }`}
-              </pre>
+                  </pre>
 
-              <div className="mt-4 space-y-2 text-sm text-slate-700">
-                <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-emerald-600" />
-                  Box model basics
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-emerald-600" />
-                  Flexbox layout
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-4 w-4 rounded-full border" />
-                  Grid fundamentals
+                  <div className="mt-4 space-y-2 text-sm text-slate-700">
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                      HTML structure
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-emerald-600" />
+                      CSS spacing and layout
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="h-4 w-4 rounded-full border" />
+                      Final website build
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
+                      <span>Beginner friendly</span>
+                      <span>Step by step</span>
+                    </div>
+                    <div className="mt-2 h-2 w-full rounded-full bg-slate-200">
+                      <div className="h-2 w-[67%] rounded-full bg-blue-600" />
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="mt-5">
-                <div className="flex items-center justify-between text-xs text-slate-500">
-                  <span>67%</span>
-                  <span>12/18 lessons</span>
-                </div>
-                <div className="mt-2 h-2 w-full rounded-full bg-slate-200">
-                  <div className="h-2 w-[67%] rounded-full bg-blue-600" />
-                </div>
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* FEATURES */}
-      <section className="mx-auto max-w-6xl px-6 py-14">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-            Built for how beginners actually learn
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-            Everything you need to go from zero to building real websites,
-            without the overwhelm.
-          </p>
-        </div>
+      <section className="py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp} className="text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                Built for how beginners actually learn
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+                Clear lessons, simple explanations, and a real beginner project
+                you can actually finish.
+              </p>
+            </motion.div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <FeatureCard
-            icon={<Map className="h-5 w-5 text-blue-600" />}
-            title="Clear Roadmap"
-            desc="Know exactly what to learn next. No rabbit holes or decision fatigue."
-          />
-          <FeatureCard
-            icon={<Search className="h-5 w-5 text-violet-600" />}
-            title="Searchable Text Lessons"
-            desc="No more rewinding videos. Read, search, and reference anytime you need."
-          />
-          <FeatureCard
-            icon={<Layers3 className="h-5 w-5 text-emerald-600" />}
-            title="Projects Every Module"
-            desc="Build real things as you learn. Each module ends with a hands-on project."
-          />
-          <FeatureCard
-            icon={<InfinityIcon className="h-5 w-5 text-amber-600" />}
-            title="Lifetime Access"
-            desc="Buy once, learn forever. All future updates included at no extra cost."
-          />
+            <motion.div
+              variants={stagger}
+              className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+            >
+              <FeatureCard
+                icon={<Map className="h-5 w-5 text-blue-600" />}
+                title="Clear Roadmap"
+                desc="Know what to learn next without getting lost in random tutorials."
+              />
+              <FeatureCard
+                icon={<Search className="h-5 w-5 text-violet-600" />}
+                title="Text-Based Lessons"
+                desc="Read at your own pace, review anytime, and quickly find what you need."
+              />
+              <FeatureCard
+                icon={<Layers3 className="h-5 w-5 text-emerald-600" />}
+                title="Real Beginner Project"
+                desc="Apply what you learn by building a real website from scratch."
+              />
+              <FeatureCard
+                icon={<InfinityIcon className="h-5 w-5 text-amber-600" />}
+                title="Lifetime Access"
+                desc="Pay once and come back whenever you want to review the lessons."
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* CURRICULUM */}
-      <section className="mx-auto max-w-5xl px-6 py-14">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-            What you&apos;ll learn
-          </h2>
-          <p className="mt-3 text-slate-600">
-            6 focused modules taking you from complete beginner to building real
-            websites.
-          </p>
-        </div>
+      <section className="py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp} className="text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                What you&apos;ll learn
+              </h2>
+              <p className="mt-3 text-slate-600">
+                A simple step-by-step path from complete beginner to your first
+                real website.
+              </p>
+            </motion.div>
 
-        <div className="mt-10 space-y-4">
-          {curriculumModules.map((module, index) => (
-            <CurriculumItem
-              key={module.number}
-              number={module.number}
-              title={module.title}
-              lessons={module.lessons}
-              duration={module.duration}
-              description={module.description}
-              topics={module.topics}
-              open={index === 0}
-            />
-          ))}
+            <motion.div variants={fadeUp} className="mt-10 space-y-4">
+              {curriculumModules.map((module, index) => (
+                <CurriculumItem
+                  key={module.number}
+                  number={module.number}
+                  title={module.title}
+                  lessons={module.lessons}
+                  duration={module.duration}
+                  description={module.description}
+                  topics={module.topics}
+                  open={index === 0}
+                />
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-     {/* TESTIMONIALS */}
-<section className="mx-auto max-w-6xl px-6 py-14">
-  <div className="text-center">
-    <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-      Loved by beginners
-    </h2>
-    <p className="mt-3 text-slate-600">
-      Real feedback from real learners.
-    </p>
-  </div>
+      {/* TESTIMONIALS */}
+      <section className="py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp} className="text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                Beginner-friendly from start to finish
+              </h2>
+              <p className="mt-3 text-slate-600">
+                The kind of feedback we want from first-time learners.
+              </p>
+            </motion.div>
 
-  <div className="mt-10 grid gap-4 md:grid-cols-3">
-    <TestimonialCard
-      image={image1}
-      quote="I tried YouTube tutorials for months and got nowhere. This course gave me a clear path — I built my first website in 2 weeks!"
-      name="Maria Santos"
-      role="Career Switcher"
-    />
-    <TestimonialCard
-      image={image2}
-      quote="The text format is perfect. I can study between classes and easily find specific topics. Way better than scrubbing through hour-long videos."
-      name="James Rivera"
-      role="College Student"
-    />
-    <TestimonialCard
-      image={image3}
-      quote="The projects are what sold me. I now have 3 portfolio pieces from this course alone. Already landed my first client!"
-      name="Ana Cruz"
-      role="Freelancer"
-    />
-  </div>
-</section>
+            <motion.div
+              variants={stagger}
+              className="mt-10 grid gap-4 md:grid-cols-3"
+            >
+              <TestimonialCard
+                image={image1}
+                quote="I liked that everything was explained in a simple way. I usually get lost with coding tutorials, but this one felt easy to follow."
+                name="Maria Santos"
+                role="Complete Beginner"
+              />
+              <TestimonialCard
+                image={image2}
+                quote="The text-based lessons helped me learn faster because I could read at my own pace and go back anytime I needed."
+                name="James Rivera"
+                role="Student"
+              />
+              <TestimonialCard
+                image={image3}
+                quote="For the price, it was super worth it. I finally understood how HTML and CSS work together and built a simple page on my own."
+                name="Ana Cruz"
+                role="Beginner Learner"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* PRICING */}
-      <section id="pricing" className="mx-auto max-w-6xl px-6 py-14">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-            Choose your path
-          </h2>
-          <p className="mt-3 text-slate-600">
-            Start free, or dive deep with our comprehensive fundamentals course.
-          </p>
-        </div>
+      <section id="pricing" className="py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp} className="text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                Start free, then go deeper
+              </h2>
+              <p className="mt-3 text-slate-600">
+                Try the free mini-course first, then unlock the full beginner
+                course for only ₱49.
+              </p>
+            </motion.div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <PricingCard
-            variant="free"
-            title={freeCourse?.title ?? "Free Course"}
-            desc="Get started with HTML & CSS basics. Build your first simple webpage from scratch."
-            price="Free"
-            meta="one-time"
-            bullets={[
-              "8 beginner-friendly lessons",
-              "HTML & CSS basics",
-              "Build your first webpage",
-              "Lifetime access",
-              "Community support",
-            ]}
-            ctaText="Start Free"
-            href={freeCourse ? `/courses/${freeCourse.slug}` : "/courses"}
-          />
+            <motion.div
+              variants={stagger}
+              className="mt-10 grid gap-4 md:grid-cols-2"
+            >
+              <PricingCard
+                variant="free"
+                title={freeCourse?.title ?? "Free Mini Course"}
+                desc="A quick beginner mini-course to help you set up your tools and create your first simple webpage."
+                price="Free"
+                meta="start here"
+                bullets={[
+                  "Beginner-friendly lessons",
+                  "Set up VS Code",
+                  "Write your first HTML page",
+                  "Simple HTML & CSS basics",
+                  "Try before upgrading",
+                ]}
+                ctaText="Start Free"
+                href={freeCourse ? `/courses/${freeCourse.slug}` : "/courses"}
+              />
 
-          <PricingCard
-            variant="paid"
-            title={paidCourse?.title ?? "Web Dev Fundamentals"}
-            desc="Master HTML, CSS, and JavaScript. Build real projects with hands-on lessons every module."
-            price={paidCourse ? formatPeso(paidCourse.price_php) : "₱999"}
-            meta="one-time"
-            badge="Most Popular"
-            bullets={[
-              "All text-based lessons",
-              "Hands-on projects",
-              "HTML, CSS & JavaScript",
-              "Lifetime access & updates",
-              "Downloadable resources",
-            ]}
-            ctaText={
-              paidCourse ? `Buy ${formatPeso(paidCourse.price_php)}` : "Buy"
-            }
-            href={paidCourse ? `/courses/${paidCourse.slug}` : "/courses"}
-          />
+              <PricingCard
+                variant="paid"
+                title={paidCourse?.title ?? "Zero to First Website"}
+                desc="A beginner-friendly course that teaches you how to build a real website using HTML, CSS, responsive design, and a simple final project."
+                price={paidCourse ? formatPeso(paidCourse.price_php) : "₱49"}
+                meta="one-time payment"
+                badge="Best for beginners"
+                bullets={[
+                  "Step-by-step text lessons",
+                  "Learn HTML and CSS clearly",
+                  "Responsive design basics",
+                  "Build a real website project",
+                  "Lifetime access",
+                ]}
+                ctaText={
+                  paidCourse
+                    ? `Get Access for ${formatPeso(paidCourse.price_php)}`
+                    : "Get Access for ₱49"
+                }
+                href={paidCourse ? `/courses/${paidCourse.slug}` : "/courses"}
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="mx-auto max-w-5xl px-6 py-14">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-            Frequently asked questions
-          </h2>
-          <p className="mt-3 text-slate-600">
-            Got questions? We&apos;ve got answers.
-          </p>
-        </div>
+      <section id="faq" className="py-14">
+        <div className="mx-auto max-w-6xl px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={stagger}
+          >
+            <motion.div variants={fadeUp} className="text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                Frequently asked questions
+              </h2>
+              <p className="mt-3 text-slate-600">
+                Got questions? We&apos;ve got answers.
+              </p>
+            </motion.div>
 
-        <div className="mt-8 rounded-2xl border bg-white p-2">
-          <Accordion type="single" collapsible>
-            <AccordionItem value="a">
-              <AccordionTrigger>
-                Do I need any prior coding experience?
-              </AccordionTrigger>
-              <AccordionContent>
-                Nope. This is built for complete beginners. We start from zero
-                and build up step-by-step.
-              </AccordionContent>
-            </AccordionItem>
+            <motion.div
+              variants={fadeUp}
+              className="mx-auto mt-8 max-w-4xl rounded-2xl border bg-white p-2"
+            >
+              <Accordion type="single" collapsible>
+                <AccordionItem value="a">
+                  <AccordionTrigger>
+                    Do I need any prior coding experience?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    No. This course is built for complete beginners. We start
+                    with the basics and guide you step by step.
+                  </AccordionContent>
+                </AccordionItem>
 
-            <AccordionItem value="b">
-              <AccordionTrigger>
-                Why text-based instead of video?
-              </AccordionTrigger>
-              <AccordionContent>
-                Text is searchable and easier to review. No rewinding, no
-                skipping around — you can learn faster.
-              </AccordionContent>
-            </AccordionItem>
+                <AccordionItem value="b">
+                  <AccordionTrigger>
+                    Why text-based instead of video?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Text lessons are easier to review, search, and go back to at
+                    your own pace. You can learn faster without scrubbing
+                    through long videos.
+                  </AccordionContent>
+                </AccordionItem>
 
-            <AccordionItem value="c">
-              <AccordionTrigger>How long do I have access?</AccordionTrigger>
-              <AccordionContent>
-                Lifetime access. Buy once and keep it forever — including
-                updates.
-              </AccordionContent>
-            </AccordionItem>
+                <AccordionItem value="c">
+                  <AccordionTrigger>How long do I have access?</AccordionTrigger>
+                  <AccordionContent>
+                    Lifetime access. Once you get the course, you can come back
+                    to it anytime.
+                  </AccordionContent>
+                </AccordionItem>
 
-            <AccordionItem value="d">
-              <AccordionTrigger>
-                What payment methods do you accept?
-              </AccordionTrigger>
-              <AccordionContent>
-                Card and supported wallet/QR methods via PayMongo (available
-                methods depend on what is enabled on our account).
-              </AccordionContent>
-            </AccordionItem>
+                <AccordionItem value="d">
+                  <AccordionTrigger>
+                    Is the full course really only ₱49?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It&apos;s a simple, affordable beginner course designed
+                    to help you build your first real website without spending
+                    much.
+                  </AccordionContent>
+                </AccordionItem>
 
-            <AccordionItem value="e">
-              <AccordionTrigger>Will I get a certificate?</AccordionTrigger>
-              <AccordionContent>
-                MVP version: not yet. We can add certificates later once
-                progress tracking is implemented.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+                <AccordionItem value="e">
+                  <AccordionTrigger>What will I build?</AccordionTrigger>
+                  <AccordionContent>
+                    You&apos;ll build a simple real website using HTML and CSS,
+                    then learn how to make it look better across different
+                    screen sizes and publish it online.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -746,46 +635,63 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
       <footer className="border-t bg-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-10 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 text-base font-semibold">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
-                Y
+            <Link href="/" className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white">
+                <Image
+                  src={logo}
+                  alt="CodeClover logo"
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
               </div>
-              YourBrand
-            </div>
-            <p className="mt-3 text-sm text-slate-600">
-              Learn web development the right way. Clear lessons, real projects,
-              no fluff.
+              <span className="text-base font-semibold text-slate-900">
+                CodeClover
+              </span>
+            </Link>
+
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              Beginner-friendly web development lessons focused on helping you
+              build your first real website step by step.
             </p>
           </div>
 
           <FooterCol
-            title="Product"
+            title="Learn"
             links={[
-              { label: "Curriculum", href: "#pricing" },
-              { label: "Pricing", href: "#pricing" },
-              { label: "FAQ", href: "#faq" },
+              { label: "Courses", href: "/courses" },
+              { label: "Pricing", href: "/#pricing" },
+              { label: "FAQ", href: "/#faq" },
             ]}
           />
+
           <FooterCol
-            title="Company"
+            title="Courses"
             links={[
-              { label: "About", href: "#" },
-              { label: "Blog", href: "#" },
-              { label: "Contact", href: "#" },
+              {
+                label: "Free Mini Course",
+                href: freeCourse ? `/courses/${freeCourse.slug}` : "/courses",
+              },
+              {
+                label: "Full Course",
+                href: paidCourse ? `/courses/${paidCourse.slug}` : "/courses",
+              },
+              { label: "Start Learning", href: "/courses" },
             ]}
           />
+
           <FooterCol
-            title="Legal"
+            title="Account"
             links={[
-              { label: "Privacy", href: "#" },
-              { label: "Terms", href: "#" },
-              { label: "Refunds", href: "#" },
+              { label: "Login", href: "/auth/login" },
+              { label: "Dashboard", href: "/dashboard" },
+              { label: "FAQ", href: "/#faq" },
             ]}
           />
         </div>
 
         <div className="border-t py-6 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} YourBrand. All rights reserved.
+          © {new Date().getFullYear()} CodeClover. All rights reserved.
         </div>
       </footer>
     </main>
@@ -802,13 +708,16 @@ function FeatureCard({
   desc: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-5 shadow-sm">
+    <motion.div
+      variants={fadeUp}
+      className="rounded-2xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+    >
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50">
         {icon}
       </div>
       <div className="mt-4 font-semibold text-slate-900">{title}</div>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -831,7 +740,7 @@ function CurriculumItem({
 }) {
   return (
     <details
-      className="group overflow-hidden rounded-2xl border bg-white shadow-sm"
+      className="group overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-md"
       open={open}
     >
       <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-6">
@@ -914,7 +823,10 @@ function TestimonialCard({
   role: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+    <motion.div
+      variants={fadeUp}
+      className="rounded-2xl border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+    >
       <div className="flex items-center gap-1 text-amber-500">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star key={i} className="h-4 w-4 fill-current" />
@@ -939,7 +851,7 @@ function TestimonialCard({
           <div className="text-xs text-slate-500">{role}</div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -967,9 +879,10 @@ function PricingCard({
   const paid = variant === "paid";
 
   return (
-    <div
+    <motion.div
+      variants={fadeUp}
       className={[
-        "rounded-3xl border p-8 shadow-sm",
+        "rounded-3xl border p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md",
         paid ? "bg-blue-600 text-white" : "bg-white",
       ].join(" ")}
     >
@@ -1036,7 +949,7 @@ function PricingCard({
       <Link
         href={href}
         className={[
-          "mt-7 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium",
+          "mt-7 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-medium transition",
           paid
             ? "bg-white text-blue-700 hover:bg-white/90"
             : "bg-emerald-600 text-white hover:bg-emerald-700",
@@ -1044,7 +957,7 @@ function PricingCard({
       >
         {ctaText} <ArrowRight className="h-4 w-4" />
       </Link>
-    </div>
+    </motion.div>
   );
 }
 
@@ -1060,9 +973,13 @@ function FooterCol({
       <div className="text-sm font-semibold text-slate-900">{title}</div>
       <div className="mt-3 space-y-2 text-sm text-slate-600">
         {links.map((l) => (
-          <a key={l.label} href={l.href} className="block hover:underline">
+          <Link
+            key={l.label}
+            href={l.href}
+            className="block transition hover:text-slate-900 hover:underline"
+          >
             {l.label}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

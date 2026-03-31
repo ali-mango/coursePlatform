@@ -255,7 +255,7 @@ export default async function LessonPage({
 
           {/* Mark complete */}
           {user && (
-            <div className="mt-12 flex justify-center border-t border-slate-100 pt-8">
+            <div className="mt-12 flex justify-end border-t border-slate-100 pt-8">
               <MarkCompleteButton
                 lessonId={lesson.id}
                 initialCompleted={isCurrentCompleted}
