@@ -1,11 +1,17 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
+import Image from "next/image";
+import image1 from "@/assests/images/image1.png";
+import image2 from "@/assests/images/image2.png";
+import image3 from "@/assests/images/image3.png";
 import {
   ArrowRight,
   BookOpen,
   Check,
+  CheckCircle2,
+  ChevronDown,
   Clock,
   Code2,
-  FileText,
   Infinity as InfinityIcon,
   Layers3,
   Map,
@@ -29,9 +35,385 @@ type CourseLite = {
   price_php: number;
 };
 
+type CurriculumTopic = {
+  title: string;
+  details: string[];
+};
+
+type CurriculumModule = {
+  number: number;
+  title: string;
+  lessons: number;
+  duration: string;
+  description: string;
+  topics: CurriculumTopic[];
+};
+
+const curriculumModules: CurriculumModule[] = [
+  {
+    number: 1,
+    title: "Getting Started",
+    lessons: 4,
+    duration: "45 min",
+    description:
+      "Set up your dev environment and understand how the web works.",
+    topics: [
+      {
+        title: "How websites work",
+        details: [
+          "Understand the relationship between browsers, servers, and files",
+          "Learn what HTML, CSS, and JavaScript each do",
+          "See how a webpage gets loaded and rendered",
+        ],
+      },
+      {
+        title: "Setting up VS Code",
+        details: [
+          "Install the editor and essential extensions",
+          "Organize your folders and files properly",
+          "Set up a workflow that feels clean and beginner-friendly",
+        ],
+      },
+      {
+        title: "Your first HTML file",
+        details: [
+          "Create and save your very first webpage",
+          "Understand basic tags and page structure",
+          "Open your file in the browser and test changes live",
+        ],
+      },
+      {
+        title: "Browser DevTools intro",
+        details: [
+          "Inspect elements and view styles",
+          "Debug layout issues quickly",
+          "Use DevTools to experiment without breaking your code",
+        ],
+      },
+    ],
+  },
+  {
+    number: 2,
+    title: "HTML Foundations",
+    lessons: 6,
+    duration: "1.5 hrs",
+    description: "Write semantic, accessible HTML from scratch.",
+    topics: [
+      {
+        title: "Document structure",
+        details: [
+          "Build a proper HTML5 page skeleton",
+          "Understand head, body, meta tags, and title",
+          "Keep your markup clean and readable",
+        ],
+      },
+      {
+        title: "Text & links",
+        details: [
+          "Use headings, paragraphs, emphasis, and anchors correctly",
+          "Create meaningful links and navigation paths",
+          "Improve readability with good content structure",
+        ],
+      },
+      {
+        title: "Images & media",
+        details: [
+          "Insert images with proper alt text",
+          "Work with audio, video, and embedded content",
+          "Optimize content for better accessibility",
+        ],
+      },
+      {
+        title: "Forms & inputs",
+        details: [
+          "Build forms with labels and common input types",
+          "Understand placeholders, validation, and usability",
+          "Create forms users can complete easily",
+        ],
+      },
+      {
+        title: "Tables & lists",
+        details: [
+          "Display structured data in tables",
+          "Use ordered and unordered lists properly",
+          "Choose the right structure for the right content",
+        ],
+      },
+      {
+        title: "Semantic elements",
+        details: [
+          "Use header, main, section, article, and footer meaningfully",
+          "Improve SEO and accessibility with better markup",
+          "Write HTML that feels professional from the start",
+        ],
+      },
+    ],
+  },
+  {
+    number: 3,
+    title: "CSS Fundamentals",
+    lessons: 8,
+    duration: "2.5 hrs",
+    description: "Style pages with confidence using modern CSS.",
+    topics: [
+      {
+        title: "Selectors & specificity",
+        details: [
+          "Target elements the right way",
+          "Understand class, id, and element selectors",
+          "Avoid styling conflicts and confusing overrides",
+        ],
+      },
+      {
+        title: "Box model",
+        details: [
+          "Master margin, border, padding, and content",
+          "Understand spacing and layout behavior",
+          "Fix common sizing and overflow issues",
+        ],
+      },
+      {
+        title: "Colors & typography",
+        details: [
+          "Choose readable text styles and color combinations",
+          "Apply font sizing, weight, and spacing with purpose",
+          "Make pages feel polished and intentional",
+        ],
+      },
+      {
+        title: "Flexbox",
+        details: [
+          "Align items horizontally and vertically",
+          "Build common UI layouts faster",
+          "Understand direction, spacing, and wrapping",
+        ],
+      },
+      {
+        title: "Grid layout",
+        details: [
+          "Create more advanced page structures",
+          "Control rows, columns, and placement",
+          "Know when to use Grid vs Flexbox",
+        ],
+      },
+      {
+        title: "Responsive design",
+        details: [
+          "Make layouts adapt to different screen sizes",
+          "Use breakpoints confidently",
+          "Build pages that work on mobile and desktop",
+        ],
+      },
+      {
+        title: "Transitions",
+        details: [
+          "Add subtle movement and polish",
+          "Create hover and state changes smoothly",
+          "Improve user experience without overdoing effects",
+        ],
+      },
+      {
+        title: "Project: Portfolio page",
+        details: [
+          "Apply everything in a real mini project",
+          "Build a clean personal portfolio layout",
+          "Practice combining structure, style, and responsiveness",
+        ],
+      },
+    ],
+  },
+  {
+    number: 4,
+    title: "JavaScript Basics",
+    lessons: 10,
+    duration: "3 hrs",
+    description: "Understand core JS concepts and DOM manipulation.",
+    topics: [
+      {
+        title: "Variables & types",
+        details: [
+          "Store and update data in JavaScript",
+          "Understand strings, numbers, booleans, arrays, and objects",
+          "Avoid common beginner mistakes with values",
+        ],
+      },
+      {
+        title: "Functions",
+        details: [
+          "Write reusable blocks of logic",
+          "Pass data into functions and return values",
+          "Use functions to organize your code better",
+        ],
+      },
+      {
+        title: "Conditionals",
+        details: [
+          "Make your app respond to different situations",
+          "Use if, else, and comparison logic",
+          "Control program flow clearly",
+        ],
+      },
+      {
+        title: "Loops & arrays",
+        details: [
+          "Repeat tasks efficiently",
+          "Work with lists of data",
+          "Use loops to display and process content",
+        ],
+      },
+      {
+        title: "Objects",
+        details: [
+          "Group related data together",
+          "Read and update object properties",
+          "Model real-world information in code",
+        ],
+      },
+      {
+        title: "DOM manipulation",
+        details: [
+          "Select elements and update page content",
+          "Change text, classes, and attributes dynamically",
+          "Make websites feel interactive",
+        ],
+      },
+      {
+        title: "Events",
+        details: [
+          "Respond to clicks, typing, and user actions",
+          "Connect UI controls to JavaScript behavior",
+          "Build simple interactions users can feel",
+        ],
+      },
+      {
+        title: "Fetch API",
+        details: [
+          "Get data from APIs",
+          "Understand requests, responses, and JSON",
+          "Use real external data in your projects",
+        ],
+      },
+      {
+        title: "Error handling",
+        details: [
+          "Catch errors before they break the experience",
+          "Use try/catch in practical scenarios",
+          "Debug with more confidence",
+        ],
+      },
+      {
+        title: "Project: Interactive quiz",
+        details: [
+          "Build a real mini app with state and interactions",
+          "Display questions and track answers",
+          "Practice combining logic, DOM work, and UI updates",
+        ],
+      },
+    ],
+  },
+  {
+    number: 5,
+    title: "Building Real Projects",
+    lessons: 5,
+    duration: "2 hrs",
+    description: "Combine everything into portfolio-ready projects.",
+    topics: [
+      {
+        title: "Project planning",
+        details: [
+          "Break a project into smaller steps",
+          "Plan layout, content, and functionality before coding",
+          "Work with more structure and less guesswork",
+        ],
+      },
+      {
+        title: "Landing page build",
+        details: [
+          "Create a polished marketing-style page",
+          "Practice hierarchy, spacing, and call-to-actions",
+          "Focus on real-world layout decisions",
+        ],
+      },
+      {
+        title: "To-do app",
+        details: [
+          "Build an interactive app with JavaScript",
+          "Add, remove, and manage tasks",
+          "Strengthen your understanding of DOM updates",
+        ],
+      },
+      {
+        title: "Weather app",
+        details: [
+          "Use an API in a practical project",
+          "Display live weather data on the page",
+          "Practice fetch, state updates, and user inputs",
+        ],
+      },
+      {
+        title: "Deploying online",
+        details: [
+          "Publish your project so others can view it",
+          "Understand the basics of hosting and deployment",
+          "Turn your work into portfolio-ready links",
+        ],
+      },
+    ],
+  },
+  {
+    number: 6,
+    title: "What’s Next",
+    lessons: 3,
+    duration: "30 min",
+    description:
+      "Map out your continued learning path after the fundamentals.",
+    topics: [
+      {
+        title: "Frontend frameworks overview",
+        details: [
+          "Understand what React and similar tools are for",
+          "See how frameworks build on HTML, CSS, and JavaScript",
+          "Know what to explore after mastering the basics",
+        ],
+      },
+      {
+        title: "Backend basics",
+        details: [
+          "Learn what happens behind the frontend",
+          "Understand servers, databases, and APIs at a high level",
+          "See the bigger picture of full-stack development",
+        ],
+      },
+      {
+        title: "Career roadmap",
+        details: [
+          "Choose your next projects strategically",
+          "Start building a portfolio that shows real skills",
+          "Plan your path toward freelancing, internships, or junior roles",
+        ],
+      },
+    ],
+  },
+];
+
 function formatPeso(n: number) {
   return `₱${n.toLocaleString("en-PH")}`;
 }
+
+const trustedFaces = [
+  {
+    src: image1,
+    alt: "Student face 1",
+  },
+  {
+    src: image2,
+    alt: "Student face 2",
+  },
+  {
+    src: image3,
+    alt: "Student face 3",
+  },
+];
 
 export default function LandingPage({ courses }: { courses: CourseLite[] }) {
   const freeCourse = courses.find((c) => c.is_free) ?? courses[0];
@@ -77,13 +459,24 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
             </div>
 
             <div className="mt-8 flex items-center gap-3 text-sm text-slate-600">
-              <div className="flex -space-x-2">
-                <div className="h-8 w-8 rounded-full border bg-slate-200" />
-                <div className="h-8 w-8 rounded-full border bg-slate-200" />
-                <div className="h-8 w-8 rounded-full border bg-slate-200" />
-              </div>
-              <span>Trusted by 500+ beginner devs</span>
-            </div>
+  <div className="flex -space-x-2">
+    {trustedFaces.map((face, index) => (
+      <div
+        key={index}
+        className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-slate-200 shadow-sm"
+      >
+        <Image
+          src={face.src}
+          alt={face.alt}
+          fill
+          className="object-cover"
+          sizes="32px"
+        />
+      </div>
+    ))}
+  </div>
+  <span>Trusted by 500+ beginner devs</span>
+</div>
           </div>
 
           {/* HERO CARD */}
@@ -188,53 +581,53 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
         </div>
 
         <div className="mt-10 space-y-4">
-          <CurriculumItem
-            number={1}
-            title="Getting Started"
-            meta="4 lessons • 45 min"
-            open
-            bullets={[
-              "How websites work",
-              "Your first HTML file",
-              "Setting up VS Code",
-              "Browser DevTools intro",
-            ]}
-          />
-          <CurriculumItem number={2} title="HTML Foundations" meta="6 lessons • 1.5 hrs" />
-          <CurriculumItem number={3} title="CSS Fundamentals" meta="8 lessons • 2.5 hrs" />
-          <CurriculumItem number={4} title="JavaScript Basics" meta="10 lessons • 3 hrs" />
+          {curriculumModules.map((module, index) => (
+            <CurriculumItem
+              key={module.number}
+              number={module.number}
+              title={module.title}
+              lessons={module.lessons}
+              duration={module.duration}
+              description={module.description}
+              topics={module.topics}
+              open={index === 0}
+            />
+          ))}
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-6xl px-6 py-14">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-            Loved by beginners
-          </h2>
-          <p className="mt-3 text-slate-600">
-            Real feedback from real learners.
-          </p>
-        </div>
+     {/* TESTIMONIALS */}
+<section className="mx-auto max-w-6xl px-6 py-14">
+  <div className="text-center">
+    <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+      Loved by beginners
+    </h2>
+    <p className="mt-3 text-slate-600">
+      Real feedback from real learners.
+    </p>
+  </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          <TestimonialCard
-            quote="I tried YouTube tutorials for months and got nowhere. This course gave me a clear path — I built my first website in 2 weeks!"
-            name="Maria Santos"
-            role="Career Switcher"
-          />
-          <TestimonialCard
-            quote="The text format is perfect. I can study between classes and easily find specific topics. Way better than scrubbing through hour-long videos."
-            name="James Rivera"
-            role="College Student"
-          />
-          <TestimonialCard
-            quote="The projects are what sold me. I now have 3 portfolio pieces from this course alone. Already landed my first client!"
-            name="Ana Cruz"
-            role="Freelancer"
-          />
-        </div>
-      </section>
+  <div className="mt-10 grid gap-4 md:grid-cols-3">
+    <TestimonialCard
+      image={image1}
+      quote="I tried YouTube tutorials for months and got nowhere. This course gave me a clear path — I built my first website in 2 weeks!"
+      name="Maria Santos"
+      role="Career Switcher"
+    />
+    <TestimonialCard
+      image={image2}
+      quote="The text format is perfect. I can study between classes and easily find specific topics. Way better than scrubbing through hour-long videos."
+      name="James Rivera"
+      role="College Student"
+    />
+    <TestimonialCard
+      image={image3}
+      quote="The projects are what sold me. I now have 3 portfolio pieces from this course alone. Already landed my first client!"
+      name="Ana Cruz"
+      role="Freelancer"
+    />
+  </div>
+</section>
 
       {/* PRICING */}
       <section id="pricing" className="mx-auto max-w-6xl px-6 py-14">
@@ -279,7 +672,9 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
               "Lifetime access & updates",
               "Downloadable resources",
             ]}
-            ctaText={paidCourse ? `Buy ${formatPeso(paidCourse.price_php)}` : "Buy"}
+            ctaText={
+              paidCourse ? `Buy ${formatPeso(paidCourse.price_php)}` : "Buy"
+            }
             href={paidCourse ? `/courses/${paidCourse.slug}` : "/courses"}
           />
         </div>
@@ -299,37 +694,48 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
         <div className="mt-8 rounded-2xl border bg-white p-2">
           <Accordion type="single" collapsible>
             <AccordionItem value="a">
-              <AccordionTrigger>Do I need any prior coding experience?</AccordionTrigger>
+              <AccordionTrigger>
+                Do I need any prior coding experience?
+              </AccordionTrigger>
               <AccordionContent>
-                Nope. This is built for complete beginners. We start from zero and build up step-by-step.
+                Nope. This is built for complete beginners. We start from zero
+                and build up step-by-step.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="b">
-              <AccordionTrigger>Why text-based instead of video?</AccordionTrigger>
+              <AccordionTrigger>
+                Why text-based instead of video?
+              </AccordionTrigger>
               <AccordionContent>
-                Text is searchable and easier to review. No rewinding, no skipping around — you can learn faster.
+                Text is searchable and easier to review. No rewinding, no
+                skipping around — you can learn faster.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="c">
               <AccordionTrigger>How long do I have access?</AccordionTrigger>
               <AccordionContent>
-                Lifetime access. Buy once and keep it forever — including updates.
+                Lifetime access. Buy once and keep it forever — including
+                updates.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="d">
-              <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+              <AccordionTrigger>
+                What payment methods do you accept?
+              </AccordionTrigger>
               <AccordionContent>
-                Card and supported wallet/QR methods via PayMongo (available methods depend on what is enabled on our account).
+                Card and supported wallet/QR methods via PayMongo (available
+                methods depend on what is enabled on our account).
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="e">
               <AccordionTrigger>Will I get a certificate?</AccordionTrigger>
               <AccordionContent>
-                MVP version: not yet. We can add certificates later once progress tracking is implemented.
+                MVP version: not yet. We can add certificates later once
+                progress tracking is implemented.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -347,7 +753,8 @@ export default function LandingPage({ courses }: { courses: CourseLite[] }) {
               YourBrand
             </div>
             <p className="mt-3 text-sm text-slate-600">
-              Learn web development the right way. Clear lessons, real projects, no fluff.
+              Learn web development the right way. Clear lessons, real projects,
+              no fluff.
             </p>
           </div>
 
@@ -390,7 +797,7 @@ function FeatureCard({
   title,
   desc,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   desc: string;
 }) {
@@ -408,61 +815,100 @@ function FeatureCard({
 function CurriculumItem({
   number,
   title,
-  meta,
-  bullets,
+  lessons,
+  duration,
+  description,
+  topics,
   open,
 }: {
   number: number;
   title: string;
-  meta: string;
-  bullets?: string[];
+  lessons: number;
+  duration: string;
+  description: string;
+  topics: CurriculumTopic[];
   open?: boolean;
 }) {
   return (
     <details
-      className="group rounded-2xl border bg-white p-6 shadow-sm"
+      className="group overflow-hidden rounded-2xl border bg-white shadow-sm"
       open={open}
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50 text-sm font-semibold text-blue-600">
+      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-6">
+        <div className="flex items-start gap-4">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-sm font-semibold text-blue-600">
             {number}
           </div>
+
           <div>
-            <div className="font-semibold text-slate-900">{title}</div>
-            <div className="mt-1 flex items-center gap-3 text-xs text-slate-500">
-              <span className="inline-flex items-center gap-1">
-                <BookOpen className="h-3.5 w-3.5" /> lessons
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <Clock className="h-3.5 w-3.5" /> {meta.split(" • ")[1] ?? meta}
+            <div className="flex flex-wrap items-center gap-3">
+              <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+              <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-1 text-[11px] font-medium text-blue-700">
+                Module {number}
               </span>
             </div>
+
+            <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+              <span className="inline-flex items-center gap-1">
+                <BookOpen className="h-3.5 w-3.5" />
+                {lessons} lessons
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Clock className="h-3.5 w-3.5" />
+                {duration}
+              </span>
+            </div>
+
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+              {description}
+            </p>
           </div>
         </div>
 
-        <div className="text-slate-400 transition group-open:rotate-180">⌄</div>
+        <div className="mt-1 shrink-0 rounded-full border border-slate-200 bg-slate-50 p-2 text-slate-500 transition duration-200 group-open:rotate-180 group-open:text-blue-600">
+          <ChevronDown className="h-4 w-4" />
+        </div>
       </summary>
 
-      {bullets?.length ? (
-        <div className="mt-5 grid gap-3 text-sm text-slate-600 md:grid-cols-2">
-          {bullets.map((b) => (
-            <div key={b} className="flex items-start gap-2">
-              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-600" />
-              <span>{b}</span>
+      <div className="border-t bg-slate-50/70 px-6 py-5">
+        <div className="grid gap-4 md:grid-cols-2">
+          {topics.map((topic) => (
+            <div
+              key={topic.title}
+              className="rounded-2xl border bg-white p-5 shadow-sm"
+            >
+              <div className="flex items-start gap-2">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
+                <h4 className="text-sm font-semibold text-slate-900">
+                  {topic.title}
+                </h4>
+              </div>
+
+              <div className="mt-3 space-y-2.5 pl-6">
+                {topic.details.map((detail) => (
+                  <div key={detail} className="flex items-start gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
+                    <p className="text-sm leading-relaxed text-slate-600">
+                      {detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
-      ) : null}
+      </div>
     </details>
   );
 }
 
 function TestimonialCard({
+  image,
   quote,
   name,
   role,
 }: {
+  image: any;
   quote: string;
   name: string;
   role: string;
@@ -474,10 +920,20 @@ function TestimonialCard({
           <Star key={i} className="h-4 w-4 fill-current" />
         ))}
       </div>
+
       <p className="mt-4 text-sm leading-relaxed text-slate-700">“{quote}”</p>
 
       <div className="mt-5 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-full bg-slate-200" />
+        <div className="relative h-10 w-10 overflow-hidden rounded-full border border-slate-200 bg-slate-100">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="40px"
+          />
+        </div>
+
         <div>
           <div className="text-sm font-semibold text-slate-900">{name}</div>
           <div className="text-xs text-slate-500">{role}</div>
@@ -531,16 +987,31 @@ function PricingCard({
           )}
 
           <div className="mt-4 text-xl font-semibold">{title}</div>
-          <p className={["mt-2 text-sm leading-relaxed", paid ? "text-white/80" : "text-slate-600"].join(" ")}>
+          <p
+            className={[
+              "mt-2 text-sm leading-relaxed",
+              paid ? "text-white/80" : "text-slate-600",
+            ].join(" ")}
+          >
             {desc}
           </p>
         </div>
 
         <div className="text-right">
-          <div className={["text-4xl font-semibold tracking-tight", paid ? "text-white" : "text-slate-900"].join(" ")}>
+          <div
+            className={[
+              "text-4xl font-semibold tracking-tight",
+              paid ? "text-white" : "text-slate-900",
+            ].join(" ")}
+          >
             {price}
           </div>
-          <div className={["mt-1 text-xs", paid ? "text-white/70" : "text-slate-500"].join(" ")}>
+          <div
+            className={[
+              "mt-1 text-xs",
+              paid ? "text-white/70" : "text-slate-500",
+            ].join(" ")}
+          >
             {meta}
           </div>
         </div>
@@ -549,8 +1020,15 @@ function PricingCard({
       <div className="mt-6 space-y-3">
         {bullets.map((b) => (
           <div key={b} className="flex items-start gap-2 text-sm">
-            <Check className={["mt-0.5 h-4 w-4", paid ? "text-white" : "text-emerald-600"].join(" ")} />
-            <span className={paid ? "text-white/90" : "text-slate-700"}>{b}</span>
+            <Check
+              className={[
+                "mt-0.5 h-4 w-4",
+                paid ? "text-white" : "text-emerald-600",
+              ].join(" ")}
+            />
+            <span className={paid ? "text-white/90" : "text-slate-700"}>
+              {b}
+            </span>
           </div>
         ))}
       </div>
