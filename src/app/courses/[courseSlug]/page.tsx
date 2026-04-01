@@ -79,7 +79,7 @@ export default async function CoursePage({
   // stats (placeholder students for now)
   const totalLessons = lessonRows.length;
   const hoursText = estimateHours(totalLessons);
-  const studentsText = course.is_free ? "1200+ students" : "500+ students";
+  const studentsText = course.is_free ? "70+ students" : "30+ students";
 
   // progress placeholder (later: real progress table)
   const completed = 0;
