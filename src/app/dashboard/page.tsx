@@ -1,3 +1,4 @@
+// src/app/dashboard/page.tsx
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
@@ -9,10 +10,13 @@ import {
   UserCircle2,
 } from "lucide-react";
 import { createSupabaseServer } from "@/lib/supabase/server";
+import { supabaseAdmin } from "@/lib/supabase/admin";
+import { DashboardAccount } from "@/components/ui/dashboard-account";
 
 type PurchaseRow = {
   status: string;
   course_id: string;
+  created_at: string;
 };
 
 type CourseRow = {
@@ -28,7 +32,6 @@ function getFallbackDescription(course: CourseRow) {
   if (course.is_free) {
     return "A free beginner mini-course to help you publish your first site.";
   }
-
   return "Step-by-step fundamentals with projects designed for beginners.";
 }
 
@@ -39,9 +42,10 @@ export default async function DashboardPage() {
 
   if (!user) redirect("/auth/login");
 
+  /* ── purchases ── */
   const { data: purchases } = await supabase
     .from("purchases")
-    .select("status, course_id")
+    .select("status, course_id, created_at")
     .eq("user_id", user.id);
 
   const typedPurchases = (purchases ?? []) as PurchaseRow[];
@@ -52,6 +56,7 @@ export default async function DashboardPage() {
       .map((purchase) => purchase.course_id)
   );
 
+  /* ── courses ── */
   const { data: courses } = await supabase
     .from("courses")
     .select("id,slug,title,description,is_free,price_php")
@@ -74,6 +79,62 @@ export default async function DashboardPage() {
     user.email?.split("@")?.[0] ||
     "there";
 
+  /* ── lesson progress ── */
+  const { data: progressRows } = await supabase
+    .from("lesson_progress")
+    .select("lesson_id")
+    .eq("user_id", user.id);
+
+  const completedLessonIds = new Set(
+    (progressRows ?? []).map((r: { lesson_id: string }) => r.lesson_id)
+  );
+
+  // Get lesson counts per course
+  const { data: allLessons } = await supabaseAdmin
+    .from("lessons")
+    .select("id, course_id")
+    .in(
+      "course_id",
+      myCourses.map((c) => c.id)
+    );
+
+  const lessonsByCourse = new Map<string, string[]>();
+  for (const l of allLessons ?? []) {
+    const arr = lessonsByCourse.get(l.course_id) ?? [];
+    arr.push(l.id);
+    lessonsByCourse.set(l.course_id, arr);
+  }
+
+  const courseProgress = myCourses.map((course) => {
+    const lessonIds = lessonsByCourse.get(course.id) ?? [];
+    const completedCount = lessonIds.filter((id) =>
+      completedLessonIds.has(id)
+    ).length;
+
+    return {
+      courseTitle: course.title,
+      courseSlug: course.slug,
+      totalLessons: lessonIds.length,
+      completedLessons: completedCount,
+      isFree: course.is_free,
+    };
+  });
+
+  /* ── purchased courses for account tab ── */
+  const purchasedCourses = typedCourses
+    .filter((c) => paidCourseIds.has(c.id))
+    .map((c) => {
+      const purchase = typedPurchases.find(
+        (p) => p.course_id === c.id && p.status === "paid"
+      );
+      return {
+        title: c.title,
+        slug: c.slug,
+        pricePHP: c.price_php,
+        purchasedAt: purchase?.created_at ?? "",
+      };
+    });
+
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-6xl px-6 py-10">
@@ -94,8 +155,6 @@ export default async function DashboardPage() {
                 Keep learning at your own pace. Access your courses, continue
                 where you left off, and build your skills step by step.
               </p>
-
-            
             </div>
           </div>
         </section>
@@ -108,14 +167,12 @@ export default async function DashboardPage() {
             value={String(myCourses.length)}
             description="Courses currently available in your account"
           />
-
           <DashboardStatCard
             icon={<ShoppingBag className="h-5 w-5 text-emerald-600" />}
             title="Purchased"
             value={String(purchasedCoursesCount)}
-            description="Paid courses you’ve unlocked"
+            description="Paid courses you've unlocked"
           />
-
           <DashboardStatCard
             icon={<UserCircle2 className="h-5 w-5 text-violet-600" />}
             title="Free Access"
@@ -135,7 +192,6 @@ export default async function DashboardPage() {
                 Continue learning from the courses you already have access to.
               </p>
             </div>
-
             <Link
               href="/courses"
               className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700"
@@ -150,16 +206,13 @@ export default async function DashboardPage() {
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100">
                 <BookOpen className="h-6 w-6 text-slate-500" />
               </div>
-
               <h3 className="mt-4 text-lg font-semibold text-slate-900">
                 No courses yet
               </h3>
-
               <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-600">
-                You don’t have any available courses in your dashboard yet.
+                You don&apos;t have any available courses in your dashboard yet.
                 Start with the free course or unlock the full fundamentals path.
               </p>
-
               <Link
                 href="/courses"
                 className="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
@@ -184,7 +237,6 @@ export default async function DashboardPage() {
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-100">
                         <BookOpen className="h-5 w-5 text-slate-700" />
                       </div>
-
                       <span
                         className={[
                           "inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium",
@@ -203,20 +255,16 @@ export default async function DashboardPage() {
                         )}
                       </span>
                     </div>
-
                     <h3 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900">
                       {course.title}
                     </h3>
-
                     <p className="mt-3 min-h-[56px] text-sm leading-7 text-slate-600">
                       {description}
                     </p>
-
                     <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
                       <span className="text-sm font-medium text-slate-700">
                         Continue learning
                       </span>
-
                       <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 transition group-hover:text-blue-700">
                         Open course
                         <ArrowRight className="h-4 w-4" />
@@ -228,6 +276,15 @@ export default async function DashboardPage() {
             </div>
           )}
         </section>
+
+        {/* Account Settings */}
+        {/* <DashboardAccount
+          userEmail={user.email ?? ""}
+          userName={user.user_metadata?.full_name ?? ""}
+          createdAt={user.created_at}
+          purchasedCourses={purchasedCourses}
+          courseProgress={courseProgress}
+        /> */}
       </div>
     </main>
   );
@@ -249,7 +306,6 @@ function DashboardStatCard({
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-50">
         {icon}
       </div>
-
       <div className="mt-4 text-sm font-medium text-slate-600">{title}</div>
       <div className="mt-1 text-3xl font-semibold tracking-tight text-slate-900">
         {value}

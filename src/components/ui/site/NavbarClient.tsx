@@ -111,7 +111,7 @@ export default function NavbarClient({ user }: NavbarProps) {
 
                   <div className="py-1.5">
                     <Link
-                      href="/account"
+                      href="/dashboard/account"
                       className="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 transition hover:bg-slate-50"
                     >
                       <Settings className="h-4 w-4 text-slate-400" />

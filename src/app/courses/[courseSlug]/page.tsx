@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServer } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { getUserAndHasPaid } from "@/lib/entitlements";
-import { Clock, BookOpen, Users, Lock, CheckCircle2, Circle } from "lucide-react";
+import { Clock, BookOpen, Users, Lock, CheckCircle2, Circle, ArrowLeft } from "lucide-react";
 
 type LessonRow = {
   slug: string;
@@ -90,9 +90,10 @@ export default async function CoursePage({
       <div className="mx-auto max-w-6xl px-6 py-10">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <Link className="text-sm text-slate-600 hover:underline" href="/courses">
-            ← Courses
-          </Link>
+        <Link className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700" href="/courses">
+  <ArrowLeft className="h-3.5 w-3.5" />
+  Back to Courses
+</Link>
 
           {!course.is_free && !unlocked ? (
             <div className="rounded-full border bg-white px-3 py-1 text-sm text-slate-700">
