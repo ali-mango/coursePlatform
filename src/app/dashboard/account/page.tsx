@@ -20,10 +20,11 @@ type CourseRow = {
 
 export default async function AccountPage() {
   const supabase = await createSupabaseServer();
-  const { data } = await supabase.auth.getUser();
-  const user = data.user;
+const { data } = await supabase.auth.getUser();
+const user = data.user;
 
-  if (!user) redirect("/auth/login");
+if (!user) redirect("/auth/login");
+if (!user.email_confirmed_at) redirect("/auth/login?message=verify-email");
 
   /* ── purchases ── */
   const { data: purchases } = await supabase

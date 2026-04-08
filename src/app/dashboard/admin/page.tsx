@@ -6,15 +6,22 @@ import { AdminDashboardClient } from "@/components/ui/admin-dashboard-client";
 
 export default async function AdminDashboardPage() {
   const supabase = await createSupabaseServer();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+const {
+  data: { user },
+} = await supabase.auth.getUser();
 
-  const isAdmin = user?.app_metadata?.is_admin === true;
-  if (!user || !isAdmin) {
-    redirect("/");
-  }
+if (!user) {
+  redirect("/auth/login");
+}
 
+if (!user.email_confirmed_at) {
+  redirect("/auth/login?message=verify-email");
+}
+
+const isAdmin = user?.app_metadata?.is_admin === true;
+if (!isAdmin) {
+  redirect("/");
+}
   // Fetch all stats server-side
   const [signups, learners, completions, purchases, activity] =
     await Promise.all([
